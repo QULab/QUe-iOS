@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>A52BB1A6-2544-43F0-B250-34D44647AC59</string>
+	<key>IDESourceControlProjectName</key>
+	<string>QUe</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C46083FE-6154-46A6-88CB-864515A5E7DC</key>
+		<string>https://github.com/QULab/QUe-iOS.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>QUe.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C46083FE-6154-46A6-88CB-864515A5E7DC</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/QULab/QUe-iOS.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C46083FE-6154-46A6-88CB-864515A5E7DC</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C46083FE-6154-46A6-88CB-864515A5E7DC</string>
+			<key>IDESourceControlWCCName</key>
+			<string>QUe-iOS</string>
+		</dict>
+	</array>
+</dict>
+</plist>

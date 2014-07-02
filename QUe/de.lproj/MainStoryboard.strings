@@ -1,0 +1,138 @@
+/* Class = "IBUILabel"; text = "Chair: Session Chair, Session Char"; ObjectID = "214-X6-R5J"; */
+"214-X6-R5J.text" = "Chair: Session Chair, Session Char";
+
+/* Class = "IBUINavigationItem"; title = "Authors"; ObjectID = "5gt-nf-pl4"; */
+"5gt-nf-pl4.title" = "Authors";
+
+/* Class = "IBUILabel"; text = "Name"; ObjectID = "7le-mj-qDQ"; */
+"7le-mj-qDQ.text" = "Name";
+
+/* Class = "IBUILabel"; text = "Name"; ObjectID = "B6R-F0-YDP"; */
+"B6R-F0-YDP.text" = "Name";
+
+/* Class = "IBUIBarButtonItem"; title = "Now"; ObjectID = "DRW-3g-bH2"; */
+"DRW-3g-bH2.title" = "Now";
+
+/* Class = "IBUILabel"; text = "Subtitle"; ObjectID = "Fco-ss-4MD"; */
+"Fco-ss-4MD.text" = "Subtitle";
+
+/* Class = "IBUINavigationItem"; title = "Session"; ObjectID = "FnD-R6-r6l"; */
+"FnD-R6-r6l.title" = "Session";
+
+/* Class = "IBUILabel"; text = "Company / Institute"; ObjectID = "Ikd-O2-fW7"; */
+"Ikd-O2-fW7.text" = "Company / Institute";
+
+/* Class = "IBUILabel"; text = "Monday, August 26"; ObjectID = "Ioe-jU-haJ"; */
+"Ioe-jU-haJ.text" = "Monday, August 26";
+
+/* Class = "IBUILabel"; text = "Auditorium 1"; ObjectID = "JBP-i9-dS5"; */
+"JBP-i9-dS5.text" = "Auditorium 1";
+
+/* Class = "IBUITabBarItem"; title = "Authors"; ObjectID = "L6c-TS-XyC"; */
+"L6c-TS-XyC.title" = "Authors";
+
+/* Class = "IBUILabel"; text = "Result"; ObjectID = "LqM-bK-s9O"; */
+"LqM-bK-s9O.text" = "Result";
+
+/* Class = "IBUINavigationItem"; title = "Person"; ObjectID = "OjC-ZL-Jbq"; */
+"OjC-ZL-Jbq.title" = "Person";
+
+/* Class = "IBUINavigationItem"; title = "Search"; ObjectID = "R1n-ZW-YsG"; */
+"R1n-ZW-YsG.title" = "Search";
+
+/* Class = "IBUINavigationItem"; title = "Paper"; ObjectID = "RdK-B0-cu5"; */
+"RdK-B0-cu5.title" = "Paper";
+
+/* Class = "IBUILabel"; text = "Information"; ObjectID = "S5e-qV-ckQ"; */
+"S5e-qV-ckQ.text" = "Information";
+
+/* Class = "IBUINavigationItem"; title = "Information"; ObjectID = "Sck-IM-trL"; */
+"Sck-IM-trL.title" = "Information";
+
+/* Class = "IBUILabel"; text = "Subtitle"; ObjectID = "VV4-qD-VNd"; */
+"VV4-qD-VNd.text" = "Subtitle";
+
+/* Class = "IBUILabel"; text = "Information"; ObjectID = "VdA-KB-pdK"; */
+"VdA-KB-pdK.text" = "Information";
+
+/* Class = "IBUITabBarItem"; title = "Information"; ObjectID = "WSh-pE-p8Q"; */
+"WSh-pE-p8Q.title" = "Information";
+
+/* Class = "IBUILabel"; text = "Topic"; ObjectID = "XLe-Z3-zlG"; */
+"XLe-Z3-zlG.text" = "Topic";
+
+/* Class = "IBUILabel"; text = "Room"; ObjectID = "YZf-LQ-BgO"; */
+"YZf-LQ-BgO.text" = "Room";
+
+/* Class = "IBUILabel"; text = "Work"; ObjectID = "YzO-JU-eqg"; */
+"YzO-JU-eqg.text" = "Work";
+
+/* Class = "IBUITabBarItem"; title = "Agenda"; ObjectID = "ZFF-4S-bKa"; */
+"ZFF-4S-bKa.title" = "Agenda";
+
+/* Class = "IBUISearchBar"; ZcO-5Q-AHd.scopeButtonTitles[0] = "Sessions"; ObjectID = "ZcO-5Q-AHd"; */
+"ZcO-5Q-AHd.scopeButtonTitles[0]" = "Sessions";
+
+/* Class = "IBUISearchBar"; ZcO-5Q-AHd.scopeButtonTitles[1] = "Authors"; ObjectID = "ZcO-5Q-AHd"; */
+"ZcO-5Q-AHd.scopeButtonTitles[1]" = "Authors";
+
+/* Class = "IBUISearchBar"; ZcO-5Q-AHd.scopeButtonTitles[2] = "Paper"; ObjectID = "ZcO-5Q-AHd"; */
+"ZcO-5Q-AHd.scopeButtonTitles[2]" = "Paper";
+
+/* Class = "IBUILabel"; text = "Abstract"; ObjectID = "bEu-7J-9Ot"; */
+"bEu-7J-9Ot.text" = "Abstract";
+
+/* Class = "IBUILabel"; text = "Type"; ObjectID = "bGe-Z9-Je4"; */
+"bGe-Z9-Je4.text" = "Type";
+
+/* Class = "IBUILabel"; text = "Paper title"; ObjectID = "cIm-ec-70D"; */
+"cIm-ec-70D.text" = "Paper title";
+
+/* Class = "IBUILabel"; text = "10:00 - 11:00"; ObjectID = "dnN-zK-wEe"; */
+"dnN-zK-wEe.text" = "10:00 - 11:00";
+
+/* Class = "IBUILabel"; text = "First author, second author, ..."; ObjectID = "edv-tp-bmD"; */
+"edv-tp-bmD.text" = "First author, second author, ...";
+
+/* Class = "IBUILabel"; text = "Thursday, 10:00 - 10:20"; ObjectID = "eh3-8q-L2c"; */
+"eh3-8q-L2c.text" = "Thursday, 10:00 - 10:20";
+
+/* Class = "IBUITabBarItem"; title = "Search"; ObjectID = "flN-i6-9Jh"; */
+"flN-i6-9Jh.title" = "Search";
+
+/* Class = "IBUILabel"; text = "Information"; ObjectID = "g7S-mM-BOM"; */
+"g7S-mM-BOM.text" = "Information";
+
+/* Class = "IBUILabel"; text = "Some fancy title"; ObjectID = "hRN-L4-vVW"; */
+"hRN-L4-vVW.text" = "Titel";
+
+/* Class = "IBUILabel"; text = "Result"; ObjectID = "lVD-Of-38k"; */
+"lVD-Of-38k.text" = "Result";
+
+/* Class = "IBUITabBarItem"; title = "Floor Plan"; ObjectID = "n2d-YB-xby"; */
+"n2d-YB-xby.title" = "Floor Plan";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "nST-CK-ARh"; */
+"nST-CK-ARh.text" = "Title";
+
+/* Class = "IBUILabel"; text = "First Author, Second Author, ..."; ObjectID = "nVI-Us-wtX"; */
+"nVI-Us-wtX.text" = "First Author, Second Author, ...";
+
+/* Class = "IBUINavigationItem"; title = "Floor Plan"; ObjectID = "nvb-Oc-NvR"; */
+"nvb-Oc-NvR.title" = "Floor Plan";
+
+/* Class = "IBUINavigationItem"; title = "Agenda"; ObjectID = "oWD-iD-H6I"; */
+"oWD-iD-H6I.title" = "Agenda";
+
+/* Class = "IBUIViewController"; title = "Paper"; ObjectID = "ogI-1l-Nwk"; */
+"ogI-1l-Nwk.title" = "Paper";
+
+/* Class = "IBUILabel"; text = "Result"; ObjectID = "uUG-cu-4e5"; */
+"uUG-cu-4e5.text" = "Result";
+
+/* Class = "IBUINavigationItem"; title = "PDF"; ObjectID = "upj-fV-IQu"; */
+"upj-fV-IQu.title" = "PDF";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "xvJ-M3-EKa"; */
+"xvJ-M3-EKa.text" = "Title";
+

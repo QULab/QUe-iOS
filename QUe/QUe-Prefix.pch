@@ -1,0 +1,32 @@
+//
+// Prefix header for all source files of the 'QUe' target in the 'QUe' project
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+    #import <CoreData/CoreData.h>
+    #import "ConferenceConstants.h"
+#endif
+
+#if __IPHONE_OS_VERSION_MIN_REQUIRED
+    #import <SystemConfiguration/SystemConfiguration.h>
+    #import <MobileCoreServices/MobileCoreServices.h>
+#else
+    #import <SystemConfiguration/SystemConfiguration.h>
+    #import <CoreServices/CoreServices.h>
+#endif
+
+#import <RestKit/RestKit.h>
+#import <OHAlertView/OHAlertView.h>
+#import <OHActionSheet/OHActionSheet.h>
+
+#import "Author.h"
+#import "Paper.h"
+#import "Session.h"

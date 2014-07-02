@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Author" representedClassName="Author" syncable="YES">
+        <attribute name="affiliation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="authorId" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="papers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Paper" inverseName="authors" inverseEntity="Paper" syncable="YES"/>
+    </entity>
+    <entity name="Paper" representedClassName="Paper" syncable="YES">
+        <attribute name="abstract" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="calendarEventId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="favorite" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="file" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="paperId" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="presentationEnd" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="presentationStart" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="title" attributeType="String" syncable="YES"/>
+        <relationship name="authors" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Author" inverseName="papers" inverseEntity="Author" syncable="YES"/>
+        <relationship name="session" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Session" inverseName="papers" inverseEntity="Session" syncable="YES"/>
+    </entity>
+    <entity name="Session" representedClassName="Session" syncable="YES">
+        <attribute name="calendarEventId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="chair" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="coChair" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="day" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="end" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="favorite" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="room" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sessionId" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="start" attributeType="Date" syncable="YES"/>
+        <attribute name="title" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="typeName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="papers" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Paper" inverseName="session" inverseEntity="Paper" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Author" positionX="0" positionY="0" width="128" height="133"/>
+        <element name="Paper" positionX="0" positionY="0" width="128" height="210"/>
+        <element name="Session" positionX="0" positionY="0" width="128" height="255"/>
+    </elements>
+</model>

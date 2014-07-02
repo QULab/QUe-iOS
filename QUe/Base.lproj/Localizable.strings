@@ -1,0 +1,129 @@
+/* {person name} recommends to read {paper name} */
+"%@ recommends to read \"%@\"" = "%@ recommends to read \"%@\"";
+
+/* {Link} will be opened in Mobile Safari. */
+"%@ will be opened in Mobile Safari" = "%@ will be opened in Mobile Safari";
+
+/* No comment provided by engineer. */
+"AddToFavorites" = "Add to favorites";
+
+/* No comment provided by engineer. */
+"AlertMessageAuthenticationEmail" = "Please input your email address that you registered with for the conference.";
+
+/* No comment provided by engineer. */
+"AlertMessageAuthenticationMailedPassword" = "Please input the password that you just received by email.";
+
+/* No comment provided by engineer. */
+"AlertMessageAuthenticationPaperPassword" = "Please input your email address and the password that you received at the registration desk.";
+
+/* No comment provided by engineer. */
+"AlertMessageChooseAuthenticationMethod" = "Please choose an authentication method.";
+
+/* No comment provided by engineer. */
+"AlertMessagePaperDownloadNotAvailableYet" = "Paper download is not available yet.";
+
+/* No comment provided by engineer. */
+"AlertMessagePaperSentPerMail" = "The PDF was sent to your email address.";
+
+/* No comment provided by engineer. */
+"AlertMessageRecommenderFirstAmongContacts" = "None of your contacts is using this functionality yet. Spread the word!";
+
+/* No comment provided by engineer. */
+"AlertMessageRecommenderNoContactSelected" = "You have to select at least one contact.";
+
+/* No comment provided by engineer. */
+"AlertMessageRecommenderRating" = "How did you like this recommendation? (This rating won't be visible to the sender)";
+
+/* No comment provided by engineer. */
+"AlertMessageRecommenderRecommendationDelivered" = "Your recommendation is delivered.";
+
+/* No comment provided by engineer. */
+"AlertOptionAuthenticationPaperPassword" = "Paper password";
+
+/* No comment provided by engineer. */
+"AlertOptionAuthenticationRegisteredAttendee" = "Registered attendee";
+
+/* No comment provided by engineer. */
+"AlertTitleAuthenticationEmail" = "Email address";
+
+/* No comment provided by engineer. */
+"AlertTitleAuthenticationMailedPassword" = "Password";
+
+/* No comment provided by engineer. */
+"AlertTitleAuthenticationPaperPassword" = "Paper password";
+
+/* No comment provided by engineer. */
+"AlertTitleChooseAuthenticationMethod" = "Authentication required";
+
+/* No comment provided by engineer. */
+"AlertTitleOpenExternalLink" = "External link";
+
+/* No comment provided by engineer. */
+"AlertTitlePaperDownloadNotAvailableYet" = "Not available yet";
+
+/* No comment provided by engineer. */
+"AlertTitlePaperRecommendation" = "Paper recommendation";
+
+/* No comment provided by engineer. */
+"AlertTitleRecommenderFirstAmongContacts" = "No contacts";
+
+/* No comment provided by engineer. */
+"AlertTitleRecommenderNoContactSelected" = "No contacts selected";
+
+/* No comment provided by engineer. */
+"AlertTitleRecommenderRating" = "Rating";
+
+/* No comment provided by engineer. */
+"Cancel" = "Cancel";
+
+/* No comment provided by engineer. */
+"ContinueReadingAbstract" = "Continue reading abstract";
+
+/* No comment provided by engineer. */
+"Error" = "Error";
+
+/* No comment provided by engineer. */
+"OK" = "OK";
+
+/* No comment provided by engineer. */
+"Papers" = "Papers";
+
+/* No comment provided by engineer. */
+"PauseReadingAbstract" = "Pause reading abstract";
+
+/* No comment provided by engineer. */
+"Recommend" = "Recommend";
+
+/* No comment provided by engineer. */
+"Recommendation" = "Recommendation";
+
+/* No comment provided by engineer. */
+"RemoveFromFavorites" = "Remove from favorites";
+
+/* No comment provided by engineer. */
+"Show" = "Show";
+
+/* No comment provided by engineer. */
+"StartReadingAbstract" = "Start reading abstract";
+
+/* No comment provided by engineer. */
+"Submit" = "Submit";
+
+/* No comment provided by engineer. */
+"Success" = "Success";
+
+/* No comment provided by engineer. */
+"ViewPDF" = "View full paper";
+
+/* No comment provided by engineer. */
+"AlertMessageExportEventFavoritesToCalendar" = "Do you want to export this paper to your local calendar?";
+
+/* No comment provided by engineer. */
+"AlertTitleExportEventFavoritesToCalendar" = "Add to calendar";
+
+/* No comment provided by engineer. */
+"NO" = "No";
+
+/* No comment provided by engineer. */
+"YES" = "Yes";
+
