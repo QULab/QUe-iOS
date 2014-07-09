@@ -11,7 +11,8 @@ The app is able to work without any internet connection. However, it is designed
 #Todo
 * Documentation
 
-
+#Icons
+Non-Retina icons included in this project are published under a [Creative Commons Attribution](http://www.glyphish.com/license.txt) license by [Glyphish](http://www.glyphish.com). Retina versions are only included in the pro version. 
 
 #Requirements
 * iOS6 (or above)
