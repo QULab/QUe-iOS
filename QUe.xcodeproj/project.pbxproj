@@ -20,7 +20,6 @@
 		392D6CEB19193B33009A99E3 /* QUESessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 680A372617660F6F00439C6D /* QUESessionViewController.m */; };
 		392D6CEC19193B33009A99E3 /* QUEInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E2BB721768B88C009F3D19 /* QUEInformationViewController.m */; };
 		392D6CED19193B33009A99E3 /* QUEPDFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68453BEB17872B190019C3BA /* QUEPDFViewController.m */; };
-		392D6CEE19193B33009A99E3 /* QUESearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68FFDD581789AEA600DD9278 /* QUESearchViewController.m */; };
 		392D6CEF19193B33009A99E3 /* QUEPaperCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D2DB09178C10F800320269 /* QUEPaperCell.m */; };
 		392D6CF019193B33009A99E3 /* Author.m in Sources */ = {isa = PBXBuildFile; fileRef = 6807BBDE17959C5400CBEA36 /* Author.m */; };
 		392D6CF119193B33009A99E3 /* Paper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6807BBE117959C5400CBEA36 /* Paper.m */; };
@@ -72,7 +71,6 @@
 		68470017170BF10F005A9EA6 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68470015170BF10F005A9EA6 /* MainStoryboard.storyboard */; };
 		6847FFFE170BF10F005A9EA6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6847FFFD170BF10F005A9EA6 /* UIKit.framework */; };
 		68E2BB731768B88C009F3D19 /* QUEInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E2BB721768B88C009F3D19 /* QUEInformationViewController.m */; };
-		68FFDD591789AEA600DD9278 /* QUESearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68FFDD581789AEA600DD9278 /* QUESearchViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -149,8 +147,6 @@
 		6847FFFF170BF10F005A9EA6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		68E2BB711768B88C009F3D19 /* QUEInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QUEInformationViewController.h; path = Controllers/Information/QUEInformationViewController.h; sourceTree = "<group>"; };
 		68E2BB721768B88C009F3D19 /* QUEInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QUEInformationViewController.m; path = Controllers/Information/QUEInformationViewController.m; sourceTree = "<group>"; };
-		68FFDD571789AEA600DD9278 /* QUESearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QUESearchViewController.h; path = Controllers/Search/QUESearchViewController.h; sourceTree = "<group>"; };
-		68FFDD581789AEA600DD9278 /* QUESearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QUESearchViewController.m; path = Controllers/Search/QUESearchViewController.m; sourceTree = "<group>"; };
 		C1E17E2E10E0462AA909DB3D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -229,15 +225,6 @@
 			name = FloorPlan;
 			sourceTree = "<group>";
 		};
-		397D4A5C19178138006837D7 /* Search */ = {
-			isa = PBXGroup;
-			children = (
-				68FFDD571789AEA600DD9278 /* QUESearchViewController.h */,
-				68FFDD581789AEA600DD9278 /* QUESearchViewController.m */,
-			);
-			name = Search;
-			sourceTree = "<group>";
-		};
 		397D4A5D19178684006837D7 /* Authors */ = {
 			isa = PBXGroup;
 			children = (
@@ -305,7 +292,6 @@
 			children = (
 				397D4A5E19178864006837D7 /* Sessions */,
 				397D4A5D19178684006837D7 /* Authors */,
-				397D4A5C19178138006837D7 /* Search */,
 				3958890617A425990019A14F /* FloorPlan */,
 				39E9126D191A36130085BA96 /* Information */,
 			);
@@ -622,7 +608,6 @@
 				392D6CEB19193B33009A99E3 /* QUESessionViewController.m in Sources */,
 				392D6CEC19193B33009A99E3 /* QUEInformationViewController.m in Sources */,
 				392D6CED19193B33009A99E3 /* QUEPDFViewController.m in Sources */,
-				392D6CEE19193B33009A99E3 /* QUESearchViewController.m in Sources */,
 				392D6CEF19193B33009A99E3 /* QUEPaperCell.m in Sources */,
 				392D6CF019193B33009A99E3 /* Author.m in Sources */,
 				392D6CF119193B33009A99E3 /* Paper.m in Sources */,
@@ -647,7 +632,6 @@
 				680A372717660F6F00439C6D /* QUESessionViewController.m in Sources */,
 				68E2BB731768B88C009F3D19 /* QUEInformationViewController.m in Sources */,
 				68453BEC17872B1A0019C3BA /* QUEPDFViewController.m in Sources */,
-				68FFDD591789AEA600DD9278 /* QUESearchViewController.m in Sources */,
 				39D2DB0A178C10F800320269 /* QUEPaperCell.m in Sources */,
 				6807BBDF17959C5400CBEA36 /* Author.m in Sources */,
 				6807BBE217959C5400CBEA36 /* Paper.m in Sources */,
