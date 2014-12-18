@@ -22,6 +22,7 @@
 #import "QUESessionsViewController.h"
 
 #import "QUESessionViewController.h"
+#import "QUEPaperViewController.h"
 #import "QUESessionCell.h"
 
 static const CGFloat QUESessionsViewControllerCellTitleFontSize = 15.0;
@@ -47,6 +48,8 @@ static const CGFloat QUESessionsViewControllerCellContentMargin = 10.0;
 @interface QUESessionsViewController () <NSFetchedResultsControllerDelegate> {
     NSMutableArray *weekdays;
     NSUInteger selectedDay;
+    NSArray *searchResults;
+    UITableView *activeTableView;
 }
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
@@ -55,27 +58,22 @@ static const CGFloat QUESessionsViewControllerCellContentMargin = 10.0;
 
 @implementation QUESessionsViewController
 
-- (NSFetchedResultsController *)fetchedResultsController {
+- (void)setupBasicFetchedResultsController {
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([Session class])];
     
-    if (!_fetchedResultsController) {
-        
-        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([Session class])];
-        
-        fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"start"
-                                                                       ascending:YES],
-                                         [NSSortDescriptor sortDescriptorWithKey:@"title"
-                                                                       ascending:YES]];
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@",@"day",@0];
-        fetchRequest.predicate = predicate;
-        
-        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-                                                                        managedObjectContext:[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext sectionNameKeyPath:@"start.stringContainingTimeOnly"
+    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"start"
+                                                                   ascending:YES],
+                                     [NSSortDescriptor sortDescriptorWithKey:@"title"
+                                                                   ascending:YES]];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"%K == %@",@"day",@0];
+    
+    self.fetchedResultsController = nil;
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                                                        managedObjectContext:[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext
+                                                                          sectionNameKeyPath:@"start.stringContainingTimeOnly"
                                                                                    cacheName:nil];
-        _fetchedResultsController.delegate = self;
-    }
-    
-    return _fetchedResultsController;
+    self.fetchedResultsController.delegate = self;
+    activeTableView = self.tableView;
 }
 
 - (void)viewDidLoad {
@@ -106,7 +104,6 @@ static const CGFloat QUESessionsViewControllerCellContentMargin = 10.0;
     }
     else {
         [self.tableView reloadData];
-        [self scrollToCurrentTimeSlot:NULL];
     }
 }
 
@@ -115,6 +112,7 @@ static const CGFloat QUESessionsViewControllerCellContentMargin = 10.0;
 }
 
 - (void)setup {
+    [self setupBasicFetchedResultsController];
     
     self.nextDayButton.enabled = NO;
     self.previousDayButton.enabled = NO;
@@ -197,54 +195,236 @@ static const CGFloat QUESessionsViewControllerCellContentMargin = 10.0;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [[self.fetchedResultsController sections] count];
+    NSInteger numberOfSections = 0;
+    
+    if (tableView == activeTableView) {
+        numberOfSections = [[self.fetchedResultsController sections] count];
+    }
+    
+    return numberOfSections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    id sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    NSInteger numberOfRows = 0;
     
-    return [sectionInfo numberOfObjects];
+    if (tableView == activeTableView) {
+        id sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+        numberOfRows = [sectionInfo numberOfObjects];
+    }
+    
+    return numberOfRows;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    Session *session = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    CGFloat width = self.tableView.frame.size.width - QUESessionsViewControllerCellContentMargin*2 - 20;
-    
-    CGSize textSize = [session.title sizeWithFont:[UIFont boldSystemFontOfSize:QUESessionsViewControllerCellTitleFontSize]
-                                constrainedToSize:CGSizeMake(width, FLT_MAX)];
-    CGFloat height = textSize.height;
-    
-    CGFloat subTitleHeight = QUESessionsViewControllerCellDetailTitleFontSize + QUESessionsViewControllerCellContentMargin;
-    
-    return height + subTitleHeight + QUESessionsViewControllerCellContentMargin*2;
+    if (tableView == self.searchDisplayController.searchResultsTableView &&
+        self.searchDisplayController.searchBar.selectedScopeButtonIndex == QUESearchScopePapers) {
+        Paper *paper = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        
+        CGFloat width = self.searchDisplayController.searchResultsTableView.frame.size.width - QUESessionsViewControllerCellContentMargin*2 - 20;
+        
+        CGSize textSize = [paper.title sizeWithFont:[UIFont boldSystemFontOfSize:QUESessionsViewControllerCellTitleFontSize]
+                                  constrainedToSize:CGSizeMake(width, FLT_MAX)];
+        CGFloat height = textSize.height;
+        
+        NSMutableString *authorList = [NSMutableString string];
+        [paper.authors enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            if (idx > 0 && idx < [paper.authors count]) {
+                [authorList appendString:@", "];
+            }
+            
+            [authorList appendFormat:@"%@ %@",((Author *)obj).firstName, ((Author *)obj).lastName];
+        }];
+        
+        CGSize detailSize = [authorList sizeWithFont:[UIFont systemFontOfSize:QUESessionsViewControllerCellDetailTitleFontSize]
+                                   constrainedToSize:CGSizeMake(width, FLT_MAX)];
+        CGFloat subTitleHeight = detailSize.height;
+        
+        return height + subTitleHeight + QUESessionsViewControllerCellContentMargin*2;
+    } else {
+        Session *session = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        
+        CGFloat width = self.tableView.frame.size.width - QUESessionsViewControllerCellContentMargin*2 - 20;
+        
+        CGSize textSize = [session.title sizeWithFont:[UIFont boldSystemFontOfSize:QUESessionsViewControllerCellTitleFontSize]
+                                    constrainedToSize:CGSizeMake(width, FLT_MAX)];
+        CGFloat height = textSize.height;
+        
+        CGFloat subTitleHeight = QUESessionsViewControllerCellDetailTitleFontSize + QUESessionsViewControllerCellContentMargin;
+        
+        return height + subTitleHeight + QUESessionsViewControllerCellContentMargin*2;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"Session";
-    QUESessionCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier
-                                                                forIndexPath:indexPath];
-    Session *session = [self.fetchedResultsController objectAtIndexPath:indexPath];
-
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", session.title];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@", session.typeName, session.room];
-    cell.favoriteImageView.hidden = !session.favorite;
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        switch (self.searchDisplayController.searchBar.selectedScopeButtonIndex) {
+            case QUESearchScopeSessions: {
+                Session *session = [self.fetchedResultsController objectAtIndexPath:indexPath];
+                
+                static NSString *CellIdentifier = @"Session";
+                QUESessionCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                
+                cell.textLabel.text = [NSString stringWithFormat:@"%@", session.title];
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@", session.typeName, session.room];
+                cell.favoriteImageView.hidden = !session.favorite;
+                
+                return cell;
+                
+                break;
+            }
+            case QUESearchScopePapers: {
+                Paper *paper = [self.fetchedResultsController objectAtIndexPath:indexPath];
+                
+                static NSString *CellIdentifier = @"Session";
+                QUESessionCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                
+                cell.textLabel.text = [NSString stringWithFormat: @"%@", paper.title];
+                
+                NSMutableString *authorList = [NSMutableString string];
+                [paper.authors enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                    if (idx > 0 && idx < [paper.authors count]) {
+                        [authorList appendString:@", "];
+                    }
+                    
+                    [authorList appendFormat:@"%@ %@",((Author *)obj).firstName, ((Author *)obj).lastName];
+                }];
+                
+                cell.detailTextLabel.text = authorList;
+                cell.favoriteImageView.hidden = !paper.favorite;
+                
+                return cell;
+                
+                break;
+            }
+        }
+    } else {
+        static NSString *CellIdentifier = @"Session";
+        QUESessionCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier
+                                                                    forIndexPath:indexPath];
+        Session *session = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        
+        cell.textLabel.text = [NSString stringWithFormat:@"%@", session.title];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@", session.typeName, session.room];
+        cell.favoriteImageView.hidden = !session.favorite;
+        
+        return cell;
+    }
     
-    return cell;
+    return nil;
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
     [self.tableView reloadData];
 }
 
+#pragma mark - Search
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    activeTableView = self.searchDisplayController.searchResultsTableView;
+    self.searchDisplayController.searchBar.selectedScopeButtonIndex = QUESearchScopeSessions;
+    [self searchBar:self.searchDisplayController.searchBar selectedScopeButtonIndexDidChange:QUESearchScopeSessions];
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    activeTableView = self.tableView;
+}
+
+- (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope {
+    NSFetchRequest *fetchRequest;
+    switch (selectedScope) {
+        case QUESearchScopeSessions: {
+            fetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([Session class])];
+            
+            fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"start" ascending:YES]];
+            break;
+        }
+        case QUESearchScopePapers: {
+            fetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([Paper class])];
+            
+            fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES]];
+            break;
+        }
+    }
+    
+    self.fetchedResultsController = nil;
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                                                        managedObjectContext:[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext
+                                                                          sectionNameKeyPath:nil
+                                                                                   cacheName:nil];
+    self.fetchedResultsController.delegate = self;
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    NSPredicate *predicate;
+    switch (searchBar.selectedScopeButtonIndex) {
+        case QUESearchScopeSessions: {
+            predicate = [NSPredicate predicateWithFormat:@"title CONTAINS[c] %@ OR typeName CONTAINS[cd] %@",
+                         self.searchDisplayController.searchBar.text, self.searchDisplayController.searchBar.text];
+            
+            break;
+        }
+        case QUESearchScopePapers: {
+            predicate = [NSPredicate predicateWithFormat:@"%K CONTAINS[cd] %@ OR %K CONTAINS[cd] %@ OR %K CONTAINS[cd] %@",
+                         @"title", self.searchDisplayController.searchBar.text, @"abstract", self.searchDisplayController.searchBar.text, @"code", self.searchDisplayController.searchBar.text];
+            break;
+        }
+    }
+    
+    self.fetchedResultsController.fetchRequest.predicate = predicate;
+    
+    NSError *error;
+    if (![self.fetchedResultsController performFetch:&error]) {
+        [OHAlertView showAlertWithTitle:NSLocalizedString(@"Error", nil)
+                                message:[error localizedDescription]
+                          dismissButton:NSLocalizedString(@"OK", nil)];
+    }
+    else {
+        [self.searchDisplayController.searchResultsTableView reloadData];
+    }
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [self setupBasicFetchedResultsController];
+    [self.searchDisplayController.searchResultsTableView reloadData];
+    [self.tableView reloadData];
+    [self updateDayNavigator];
+}
+
 #pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.searchDisplayController.active &&
+        self.searchDisplayController.searchBar.selectedScopeButtonIndex == QUESearchScopePapers) {
+        [self performSegueWithIdentifier:@"showPaperDetail" sender:nil];
+    } else {
+        [self performSegueWithIdentifier:@"showSessionDetail" sender:nil];
+    }
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showSessionDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        NSIndexPath *indexPath;
+        if (self.searchDisplayController.active) {
+            indexPath = self.searchDisplayController.searchResultsTableView.indexPathForSelectedRow;
+        } else {
+            indexPath = self.tableView.indexPathForSelectedRow;
+        }
+        
         Session *session = [self.fetchedResultsController objectAtIndexPath:indexPath];
         QUESessionViewController *sessionViewController = segue.destinationViewController;
         sessionViewController.session = session;
+    } else if ([segue.identifier isEqualToString:@"showPaperDetail"]) {
+        NSIndexPath *indexPath = self.searchDisplayController.searchResultsTableView.indexPathForSelectedRow;
+        
+        Paper *paper = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        QUEPaperViewController *paperViewController = segue.destinationViewController;
+        paperViewController.paper = paper;
+    }
+    
+    if (self.searchDisplayController.active) {
+        [self.searchDisplayController setActive:NO];
+        [self setupBasicFetchedResultsController];
+        [self.tableView reloadData];
+        [self updateDayNavigator];
     }
 }
 
@@ -277,8 +457,21 @@ static const CGFloat QUESessionsViewControllerCellContentMargin = 10.0;
 }
 
 - (IBAction)scrollToCurrentTimeSlot:(id)sender {
-    if (![[self.fetchedResultsController sections] count]) {
-        return;
+    NSDateFormatter *df1 = [[NSDateFormatter alloc] init];
+    if ([[[NSLocale currentLocale] localeIdentifier] isEqualToString:@"de_DE"]) {
+        // use German format
+        df1.locale = [NSLocale currentLocale];
+        df1.dateFormat = @"EEEE, dd. MMMM";
+    }
+    else {
+        // use en_US format
+        df1.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+        df1.dateFormat = @"EEEE, MMMM dd";
+    }
+    NSString *currentDay = [df1 stringFromDate:[NSDate date]];
+    if ([weekdays containsObject:currentDay]) {
+        selectedDay = [weekdays indexOfObject:currentDay];
+        [self updateDayNavigator];
     }
     
     NSMutableArray *sectionDates = [NSMutableArray array];

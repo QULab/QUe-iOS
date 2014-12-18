@@ -21,8 +21,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface QUESessionsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+typedef NS_ENUM(NSUInteger, QUESearchScope) {
+    QUESearchScopeSessions,
+    QUESearchScopePapers
+};
 
+@interface QUESessionsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchDisplayDelegate>
+
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (weak, nonatomic) IBOutlet UIButton *previousDayButton;
