@@ -141,8 +141,8 @@ static const CGFloat QUEAuthorsViewControllerCellContentMargin = 10.0;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Author";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
-                                                            forIndexPath:indexPath];
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier
+                                                                 forIndexPath:indexPath];
     
     Author *author = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
@@ -168,10 +168,66 @@ static const CGFloat QUEAuthorsViewControllerCellContentMargin = 10.0;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showAuthorDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        NSIndexPath *indexPath;
+        if (self.searchDisplayController.active) {
+            indexPath = self.searchDisplayController.searchResultsTableView.indexPathForSelectedRow;
+        } else {
+            indexPath = [self.tableView indexPathForSelectedRow];
+        }
+        
         Author *author = [self.fetchedResultsController objectAtIndexPath:indexPath];
         QUEAuthorViewController *authorViewController = segue.destinationViewController;
         authorViewController.author = author;
+    }
+    
+    [self.searchDisplayController setActive:NO];
+    self.fetchedResultsController.fetchRequest.predicate = nil;
+    NSError *error;
+    if (![self.fetchedResultsController performFetch:&error]) {
+        [OHAlertView showAlertWithTitle:NSLocalizedString(@"Error", nil)
+                                message:[error localizedDescription]
+                          dismissButton:NSLocalizedString(@"OK", nil)];
+    }
+    else {
+        [self.tableView reloadData];
+    }
+}
+
+#pragma mark - Search
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    NSArray *words = [searchText componentsSeparatedByString:@" "];
+    NSMutableArray *predicateList = [NSMutableArray array];
+    for (NSString *word in words) {
+        if ([word length] > 0) {
+            NSPredicate *pred = [NSPredicate predicateWithFormat:@"%K CONTAINS[cd] %@ OR %K CONTAINS[cd] %@ OR %K CONTAINS[cd] %@", @"firstName", word, @"lastName", word, @"affiliation", word];
+            [predicateList addObject:pred];
+        }
+    }
+    NSPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:predicateList];
+    
+    self.fetchedResultsController.fetchRequest.predicate = predicate;
+    
+    NSError *error;
+    if (![self.fetchedResultsController performFetch:&error]) {
+        [OHAlertView showAlertWithTitle:NSLocalizedString(@"Error", nil)
+                                message:[error localizedDescription]
+                          dismissButton:NSLocalizedString(@"OK", nil)];
+    }
+    else {
+        [self.searchDisplayController.searchResultsTableView reloadData];
+    }
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    self.fetchedResultsController.fetchRequest.predicate = nil;
+    NSError *error;
+    if (![self.fetchedResultsController performFetch:&error]) {
+        [OHAlertView showAlertWithTitle:NSLocalizedString(@"Error", nil)
+                                message:[error localizedDescription]
+                          dismissButton:NSLocalizedString(@"OK", nil)];
+    }
+    else {
+        [self.tableView reloadData];
     }
 }
 

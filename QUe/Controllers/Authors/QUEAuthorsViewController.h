@@ -23,4 +23,6 @@
 
 @interface QUEAuthorsViewController : UITableViewController
 
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+
 @end
