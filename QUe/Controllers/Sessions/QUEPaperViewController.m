@@ -202,6 +202,12 @@ finish:
 }
 
 - (void)update {
+    
+    if (!QUEServerURL) {
+        // no remote url given -> no update
+        return;
+    }
+    
     NSString *path = [NSString stringWithFormat:@"papers/%@",self.paper.paperId];
     [[RKObjectManager sharedManager] getObjectsAtPath:path
                                            parameters:nil

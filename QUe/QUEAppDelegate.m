@@ -62,7 +62,8 @@
 
 - (void)setupRestKit {
     
-    RKObjectManager *manager = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:QUEServerURL]];
+    NSString *remoteURL = QUEServerURL ? QUEServerURL : @"localhost";
+    RKObjectManager *manager = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:remoteURL]];
     
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     

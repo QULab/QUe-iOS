@@ -514,6 +514,12 @@ static const CGFloat QUESessionsViewControllerCellContentMargin = 10.0;
 }
 
 - (void)update {
+    
+    if (!QUEServerURL) {
+        // no remote url given -> no update
+        return;
+    }
+    
     [[RKObjectManager sharedManager] getObjectsAtPath:@"sessions"
                                            parameters:nil
                                               success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {

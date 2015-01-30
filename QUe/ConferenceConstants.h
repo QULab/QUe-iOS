@@ -22,7 +22,7 @@
 #ifndef QUe_ConferenceConstants_h
 #define QUe_ConferenceConstants_h
 
-static NSString * const QUEServerURL = @"http://conference1.service.tu-berlin.de/v2/conferences/6/";
+static NSString * const QUEServerURL = @"http://conference1.service.tu-berlin.de/v2/conferences/6/"; // may be set to 'nil' to allow for offline-only operation
 static NSString * const QUEInformationURL = @"http://qu.tu-berlin.de";
 static NSString * const QUEPaperDownloadAvailableDate = @"2014-01-01 09:00:00";
 

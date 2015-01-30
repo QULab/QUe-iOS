@@ -97,6 +97,12 @@ static const CGFloat QUESessionViewControllerCellContentMargin = 10.0;
 }
 
 - (void)update {
+    
+    if (!QUEServerURL) {
+        // no remote url given -> no update
+        return;
+    }
+    
     NSString *path = [NSString stringWithFormat:@"sessions/%@",self.session.sessionId];
     [[RKObjectManager sharedManager] getObjectsAtPath:path
                                            parameters:nil
