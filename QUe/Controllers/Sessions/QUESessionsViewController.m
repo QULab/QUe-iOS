@@ -319,6 +319,7 @@ static const CGFloat QUESessionsViewControllerCellContentMargin = 10.0;
 
 #pragma mark - Search
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [activeTableView setContentOffset:activeTableView.contentOffset animated:NO];
     activeTableView = self.searchDisplayController.searchResultsTableView;
     self.searchDisplayController.searchBar.selectedScopeButtonIndex = QUESearchScopeSessions;
     [self searchBar:self.searchDisplayController.searchBar selectedScopeButtonIndexDidChange:QUESearchScopeSessions];
